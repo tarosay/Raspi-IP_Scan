@@ -334,15 +334,18 @@ set "START=${startHost}"
 set "END=${endHost}"
 
 rem 表示
-echo ================================
-echo ネットワーク設定:
-echo   ネットワークベース:  %NET_BASE%
-echo   開始ホスト:           %START%
-echo   終了ホスト:           %END%
-echo ================================
-echo IPアドレススキャンを開始します。
-echo ⚠️ 注意:
-echo   ・スキャンには非常に時間がかかる場合があります。環境によっては完了まで数分以上かかります。
+powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+  "[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;" ^
+  "Write-Host '===============================';" ^
+  "Write-Host 'ネットワーク設定:';" ^
+  "Write-Host ('  ネットワークベース:  {0}' -f $env:NET_BASE);" ^
+  "Write-Host ('  開始ホスト:           {0}' -f $env:START);" ^
+  "Write-Host ('  終了ホスト:           {0}' -f $env:END);" ^
+  "Write-Host '===============================';" ^
+  "Write-Host 'IPアドレススキャンを開始します。';" ^
+  "Write-Host '⚠️ 注意';" ^
+  "Write-Host 'スキャンには非常に時間がかかる場合があります。'"
+
 echo.
 echo IP              HostName                  MAC                Vendor
 echo ------------------------------------------------------------------------
